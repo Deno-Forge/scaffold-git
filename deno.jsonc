@@ -1,0 +1,41 @@
+{
+  "name": "@deno-forge/scaffold-git",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "description": "Initializes a local Git repository for a Deno module and assists the user in configuring it for GitHub",
+  "githubPath": "Deno-Forge/scaffold-git",
+  "tasks": {
+    "test": "deno test",
+    "check": "deno fmt && deno lint && deno task test",
+    "make:git": "deno run --allow-read --allow-run --allow-write ./mod.ts"
+  },
+  "imports": {
+    // real dependencies
+    "@std/fs": "jsr:@std/fs@1",
+    "@std/cli": "jsr:@std/cli@1",
+    "@std/jsonc": "jsr:@std/jsonc@1",
+    // test dependencies
+    "@std/testing": "jsr:@std/testing@1",
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "fmt": {
+    "useTabs": true,
+    "lineWidth": 120,
+    "indentWidth": 4,
+    "semiColons": false,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": [
+      "src/*.ts",
+      "tests/*.ts"
+    ]
+  },
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "mod.ts",
+      "src/**/*.ts"
+    ]
+  }
+}
