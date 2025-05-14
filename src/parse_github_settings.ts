@@ -1,21 +1,19 @@
 import { parse } from '@std/jsonc'
 import type { GithubSettings } from './types.ts'
 
-export class ParseError extends Error {}
-export async function parseDenoConfig(readFn: typeof Deno.readTextFile = Deno.readTextFile): Promise<Record<string, unknown>> {
-  try {
-    const text = await readFn('deno.jsonc')
-        .catch(() => readFn('deno.json'))
-    return parse(text) as Record<string, unknown>
-  } catch {
-    throw new ParseError('Failed to read deno.json(c).')
-  }
+
+/** @internal */
+export type ParseGithubSettingsInjects = {
+  parseConfig?: typeof parseDenoConfig
 }
 
-export async function parseGithubSettings(readFn: typeof Deno.readTextFile = Deno.readTextFile): Promise<GithubSettings|null>
+/** Parses the Github settings from deno.json(c) */
+export async function parseGithubSettings(
+    { parseConfig = parseDenoConfig }: ParseGithubSettingsInjects = {},
+): Promise<GithubSettings|null>
 {
   try {
-    const config = await parseDenoConfig(readFn)
+    const config = await parseConfig()
     const githubPath: string = config.githubPath?.toString() ?? ''
     const description: string = config.description?.toString() ?? ''
     if(!githubPath) {
@@ -30,5 +28,24 @@ export async function parseGithubSettings(readFn: typeof Deno.readTextFile = Den
     }
   }catch(_e){
       return null
+  }
+}
+
+/** @internal */
+export class ParseError extends Error {}
+/** @internal */
+export type ParseDenoConfigInjects = {
+  readFn?: typeof Deno.readTextFile
+}
+/** @internal */
+export async function parseDenoConfig(
+    {readFn = Deno.readTextFile}: ParseDenoConfigInjects = {}
+): Promise<Record<string, unknown>> {
+  try {
+    const text = await readFn('deno.jsonc')
+        .catch(() => readFn('deno.json'))
+    return parse(text) as Record<string, unknown>
+  } catch {
+    throw new ParseError('Failed to read deno.json(c).')
   }
 }

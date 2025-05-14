@@ -29,6 +29,19 @@
       "src/*.ts"
     ]
   },
+  "lint": {
+    "include": ["src/","mod.ts"],
+    "exclude": ["**/*.test.ts"],
+    "rules": {
+      "tags": [
+        "recommended",
+        "jsr"
+      ],
+      "include": [
+        "require-jsdoc"
+      ]
+    }
+  },
   "publish": {
     "include": [
       "LICENSE",

@@ -1,8 +1,7 @@
-export { runGitSetup, parseRunGitSetupOptions } from './src/run.ts'
-export type { RunGitSetupOptions } from './src/run.ts'
+export { runGitSetup, parseRunGitSetupOptions, type RunGitSetupOptions } from './src/run_git_setup.ts'
 
 if (import.meta.main) {
-  const { runGitSetup, parseRunGitSetupOptions } = await import('./src/run.ts')
+  const { runGitSetup, parseRunGitSetupOptions } = await import('./src/run_git_setup.ts')
   const options = parseRunGitSetupOptions()
 
   try {

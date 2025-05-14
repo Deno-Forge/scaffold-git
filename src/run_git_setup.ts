@@ -1,44 +1,42 @@
 import { parseArgs } from '@std/cli/parse-args'
-import { parseGithubSettings } from "./parse_github_settings.ts";
-import { checkGitInstalled } from './check_git_installed.ts'
-import { initGitRepo } from './init_git_repo.ts'
-import { setRemoteOrigin } from './set_remote_origin.ts'
-import { printGitHubUrl } from './print_github_url.ts'
+import { parseGithubSettings as defaultParseGithubSettings } from "./parse_github_settings.ts";
+import { checkGitInstalled as defaultCheckGitInstalled } from './check_git_installed.ts'
+import { initGitRepo as defaultInitGitRepo } from './init_git_repo.ts'
+import { setRemoteOrigin as defaultSetRemoteOrigin } from './set_remote_origin.ts'
+import { printGitHubUrl as defaultPrintGithubUrl } from './print_github_url.ts'
 
-type Injects = {
-  parseGithubSettings: typeof parseGithubSettings
-  checkGitInstalled: typeof checkGitInstalled
-  initRepoIfNeeded: typeof initGitRepo
-  setRemoteOrigin: typeof setRemoteOrigin
-  printGitHubUrl: typeof printGitHubUrl
+/** @internal */
+type RunGitSetupInjects = {
+  parseGithubSettings?: typeof defaultParseGithubSettings
+  checkGitInstalled?: typeof defaultCheckGitInstalled
+  initRepoIfNeeded?: typeof defaultInitGitRepo
+  setRemoteOrigin?: typeof defaultSetRemoteOrigin
+  printGitHubUrl?: typeof defaultPrintGithubUrl
 }
 
-const defaultInjects: Injects = {
-  parseGithubSettings: parseGithubSettings,
-  checkGitInstalled: checkGitInstalled,
-  initRepoIfNeeded: initGitRepo,
-  setRemoteOrigin: setRemoteOrigin,
-  printGitHubUrl: printGitHubUrl,
-}
-
+/** Options for runGitSetup */
 export type RunGitSetupOptions = {
+  /** The name of the branch to create. Defaults to 'main'. */
   branchName?: string,
+  /** Whether to run in dry-run mode. Defaults to false. */
   dryRun?: boolean,
+  /** Whether to skip committing files. Defaults to false. */
   noCommit?: boolean,
+  /** Whether to open the GitHub URL in the browser. Defaults to true. */
   open?: boolean,
 }
 
+/** Runs all steps of the git setup process */
 export async function runGitSetup(
-    {branchName = 'main', dryRun = false, noCommit = false, open = true}: RunGitSetupOptions = {},
-    injects: Injects = defaultInjects
+    {branchName = 'main', dryRun = false, noCommit = false, open = true,}: RunGitSetupOptions = {},
+    {
+      parseGithubSettings = defaultParseGithubSettings,
+      checkGitInstalled = defaultCheckGitInstalled,
+      initRepoIfNeeded = defaultInitGitRepo,
+      setRemoteOrigin = defaultSetRemoteOrigin,
+      printGitHubUrl = defaultPrintGithubUrl,
+    }: RunGitSetupInjects = {},
 ): Promise<void> {
-  const {
-    parseGithubSettings,
-    checkGitInstalled,
-    initRepoIfNeeded,
-    setRemoteOrigin,
-    printGitHubUrl,
-  } = injects
 
   // Step 1: Ensure Git is installed
   await checkGitInstalled()

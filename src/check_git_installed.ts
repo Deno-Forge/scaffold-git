@@ -1,15 +1,17 @@
 import {GitError} from "./errors.ts";
 import type {CommandConstructor} from "./types.ts";
 
-
-type Injects = {
-  commandClass: CommandConstructor
+/** @internal */
+export type CheckGitInstalledInjects = {
+  commandClass?: CommandConstructor
 }
 
 /** Checks if git is installed and available in the PATH */
-export async function checkGitInstalled(injects: Injects = {commandClass: Deno.Command}): Promise<true> {
+export async function checkGitInstalled(
+    { commandClass = Deno.Command }: CheckGitInstalledInjects = {},
+): Promise<true> {
   try {
-    const command = new injects.commandClass('git', {args: ['--version']})
+    const command = new commandClass('git', {args: ['--version']})
     await command.output()
     return true
   } catch (err) {

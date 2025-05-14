@@ -1,31 +1,29 @@
 import {GitAlreadyInitializedError, GitError} from './errors.ts'
 import type { CommandConstructor } from './types.ts'
-import { createGitIgnore } from './create_gitignore.ts'
+import { createGitIgnore as defaultCreateGitIgnore } from './create_gitignore.ts'
 import { exists } from '@std/fs/exists'
 
+/** Options for initGitRepo */
 export interface GitInitOptions {
-  branchName: string
+  /** The name of the branch to create. Defaults to 'main'. */
+  branchName?: string
+  /** Whether to run in dry-run mode. Defaults to false. */
   dryRun?: boolean
+  /** Whether to skip committing files. Defaults to false. */
   noCommit?: boolean
 }
 
-export interface Injects {
-  commandClass: CommandConstructor
-  createGitIgnore: typeof createGitIgnore
-  existsFn: typeof exists
-  consoleLog: typeof console.log
+/** @internal */
+export type InitGitRepoInjects = {
+  commandClass?: CommandConstructor
+  createGitIgnore?: typeof defaultCreateGitIgnore
+  existsFn?: typeof exists
+  consoleLog?: typeof console.log
 }
 export async function initGitRepo(
-    options: GitInitOptions,
-    injects: Injects = {
-      commandClass: Deno.Command,
-      createGitIgnore: createGitIgnore,
-      existsFn: exists,
-      consoleLog: console.log,
-    }
+    {branchName = 'main', dryRun = false, noCommit = false}: GitInitOptions = {},
+    {commandClass = Deno.Command, createGitIgnore = defaultCreateGitIgnore, existsFn = exists, consoleLog = console.log}: InitGitRepoInjects = {},
 ): Promise<void> {
-  const { branchName, dryRun, noCommit } = options
-  const { commandClass, createGitIgnore, consoleLog, existsFn } = injects
 
   function shellEscape(arg: string): string {
     return arg.includes(' ') ? `"${arg}"` : arg
