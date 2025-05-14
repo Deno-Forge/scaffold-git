@@ -1,5 +1,5 @@
 import { assertEquals } from '@std/assert'
-import { parseGithubSettings } from '../../src/helpers/parse-github-settings.ts'
+import { parseGithubSettings } from './parse_github_settings.ts'
 
 Deno.test('parseGithubSettings returns null if githubPath is missing', async () => {
   const result = await parseGithubSettings(async () => `{

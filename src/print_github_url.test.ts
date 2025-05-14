@@ -1,6 +1,6 @@
 import { assertEquals } from '@std/assert'
-import {getPlatformOpenCommand, printGitHubUrl} from '../../src/helpers/print-github-url.ts'
-import { mockConsoleLog, mockDenoCommand } from "../test-helpers.ts";
+import {getPlatformOpenCommand, printGitHubUrl} from './print_github_url.ts'
+import { mockConsoleLog, mockDenoCommand } from "./test_helpers.ts";
 
 
 const defaultSettings = {

@@ -1,7 +1,7 @@
 // deno-lint-ignore-file require-await
 import { assertRejects, assertEquals } from '@std/assert'
-import { checkGitInstalled } from '../../src/helpers/check-git.ts'
-import { GitError } from '../../src/errors.ts'
+import { checkGitInstalled } from './check_git_installed.ts'
+import { GitError } from './errors.ts'
 
 Deno.test('checkGit throws helpful error if git is not installed, and calls makeGitCommand correctly', async () => {
   let calledCmd: string | null = null

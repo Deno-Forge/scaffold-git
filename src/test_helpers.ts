@@ -1,5 +1,5 @@
 // deno-lint-ignore-file require-await
-import type {CommandOutput} from "../src/types.ts";
+import type {CommandOutput} from "./types.ts";
 import type { exists } from '@std/fs/exists'
 
 export function mockConsoleLog() {

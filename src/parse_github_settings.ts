@@ -1,5 +1,5 @@
 import { parse } from '@std/jsonc'
-import type { GithubSettings } from '../types.ts'
+import type { GithubSettings } from './types.ts'
 
 export class ParseError extends Error {}
 export async function parseDenoConfig(readFn: typeof Deno.readTextFile = Deno.readTextFile): Promise<Record<string, unknown>> {

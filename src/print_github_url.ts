@@ -1,5 +1,4 @@
-import { GitError } from '../errors.ts'
-import type {CommandConstructor, GithubSettings} from '../types.ts'
+import type {CommandConstructor, GithubSettings} from './types.ts'
 
 export function getPlatformOpenCommand(platform: string = Deno.build.os): string {
   switch (platform) {

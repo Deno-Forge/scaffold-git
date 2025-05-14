@@ -1,6 +1,6 @@
-import {GitAlreadyInitializedError, GitError} from '../errors.ts'
-import type { CommandConstructor } from '../types.ts'
-import { createGitIgnore } from './create-gitignore.ts'
+import {GitAlreadyInitializedError, GitError} from './errors.ts'
+import type { CommandConstructor } from './types.ts'
+import { createGitIgnore } from './create_gitignore.ts'
 import { exists } from '@std/fs/exists'
 
 export interface GitInitOptions {

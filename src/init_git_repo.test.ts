@@ -1,9 +1,9 @@
 // deno-lint-ignore-file require-await
 import { assertEquals, assertRejects } from '@std/assert'
-import {initGitRepo, type GitInitOptions} from '../../src/helpers/init-repo.ts'
-import {GitAlreadyInitializedError, GitError} from '../../src/errors.ts'
-import { mockConsoleLog, mockDenoCommand, mockExists } from "../test-helpers.ts";
-import type {createGitIgnore} from "../../src/helpers/create-gitignore.ts";
+import {initGitRepo, type GitInitOptions} from './init_git_repo.ts'
+import {GitAlreadyInitializedError, GitError} from './errors.ts'
+import { mockConsoleLog, mockDenoCommand, mockExists } from "./test_helpers.ts";
+import type {createGitIgnore} from "./create_gitignore.ts";
 
 function mockCreateGitIgnore() {
   const gitIgnoreCalls: boolean[] = [];

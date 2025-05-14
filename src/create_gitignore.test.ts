@@ -1,6 +1,6 @@
 // deno-lint-ignore-file require-await
 import { assertEquals } from '@std/assert'
-import { createGitIgnore } from '../../src/helpers/create-gitignore.ts'
+import { createGitIgnore } from './create_gitignore.ts'
 
 // Extract the TEMPLATE so we can test it precisely
 const TEMPLATE = `

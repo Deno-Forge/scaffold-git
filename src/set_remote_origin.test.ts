@@ -1,8 +1,8 @@
 
 import { assertRejects, assertEquals } from '@std/assert'
-import { setRemoteOrigin } from '../../src/helpers/set-remote.ts'
-import { GitError } from '../../src/errors.ts'
-import { mockConsoleLog, mockDenoCommand } from "../test-helpers.ts";
+import { setRemoteOrigin } from './set_remote_origin.ts'
+import { GitError } from './errors.ts'
+import { mockConsoleLog, mockDenoCommand } from "./test_helpers.ts";
 
 
 Deno.test('setRemoteOrigin throws if githubPath is missing', async () => {

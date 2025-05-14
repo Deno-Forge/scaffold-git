@@ -1,5 +1,5 @@
-import {GitError} from "../errors.ts";
-import type {CommandConstructor} from "../types.ts";
+import {GitError} from "./errors.ts";
+import type {CommandConstructor} from "./types.ts";
 
 
 type Injects = {

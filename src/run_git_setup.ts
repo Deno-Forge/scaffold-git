@@ -1,9 +1,9 @@
 import { parseArgs } from '@std/cli/parse-args'
-import { parseGithubSettings } from "./helpers/parse-github-settings.ts";
-import { checkGitInstalled } from './helpers/check-git.ts'
-import { initGitRepo } from './helpers/init-repo.ts'
-import { setRemoteOrigin } from './helpers/set-remote.ts'
-import { printGitHubUrl } from './helpers/print-github-url.ts'
+import { parseGithubSettings } from "./parse_github_settings.ts";
+import { checkGitInstalled } from './check_git_installed.ts'
+import { initGitRepo } from './init_git_repo.ts'
+import { setRemoteOrigin } from './set_remote_origin.ts'
+import { printGitHubUrl } from './print_github_url.ts'
 
 type Injects = {
   parseGithubSettings: typeof parseGithubSettings

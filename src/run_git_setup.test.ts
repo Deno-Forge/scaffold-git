@@ -1,5 +1,5 @@
 // deno-lint-ignore-file require-await
-import {parseRunGitSetupOptions, runGitSetup} from '../src/run.ts'
+import {parseRunGitSetupOptions, runGitSetup} from './run_git_setup.ts'
 import { spy, assertSpyCallAsync } from "@std/testing/mock";
 import {assertEquals} from "@std/assert";
 
