@@ -1,7 +1,7 @@
 // deno-lint-ignore-file require-await
 import { assertEquals, assertRejects } from '@std/assert'
-import { initGitRepo, type GitInitOptions } from '../../src/helpers/init-repo.ts'
-import { GitError } from '../../src/errors.ts'
+import {initGitRepo, type GitInitOptions} from '../../src/helpers/init-repo.ts'
+import {GitAlreadyInitializedError, GitError} from '../../src/errors.ts'
 import { mockConsoleLog, mockDenoCommand, mockExists } from "../test-helpers.ts";
 import type {createGitIgnore} from "../../src/helpers/create-gitignore.ts";
 
@@ -29,7 +29,7 @@ Deno.test('initGitRepo throws GitError when a .git directory exists', async () =
                 consoleLog
               }
           ),
-      GitError,
+      GitAlreadyInitializedError,
       'Git already initialized. .git directory exists'
   )
   assertEquals(calls, [])

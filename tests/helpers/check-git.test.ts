@@ -48,14 +48,11 @@ Deno.test('checkGit returns true if git is installed', async () => {
 
   class MockCommand {
     constructor(public cmd: string, public options: { args: string[] }) {}
-    async output(): Promise<Deno.CommandOutput> {
+    async output() {
       called = true
       return {
         code: 0,
         success: true,
-        stdout: new Uint8Array(),
-        stderr: new Uint8Array(),
-        signal: null,
       }
     }
   }

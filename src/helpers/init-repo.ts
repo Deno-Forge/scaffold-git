@@ -1,4 +1,4 @@
-import { GitError } from '../errors.ts'
+import {GitAlreadyInitializedError, GitError} from '../errors.ts'
 import type { CommandConstructor } from '../types.ts'
 import { createGitIgnore } from './create-gitignore.ts'
 import { exists } from '@std/fs/exists'
@@ -15,7 +15,6 @@ export interface Injects {
   existsFn: typeof exists
   consoleLog: typeof console.log
 }
-export class GitAlreadyInitializedError extends Error {}
 export async function initGitRepo(
     options: GitInitOptions,
     injects: Injects = {
